@@ -6,7 +6,6 @@ env:
   global:
     - CLOUDSDK_CORE_DISABLE_PROMPTS=1
 before_install:
-  - echo $TRAVIS_COMMIT
   - openssl aes-256-cbc -K $encrypted_0c35eebf403c_key -iv $encrypted_0c35eebf403c_iv -in service-account.json.enc -out service-account.json -d
   - curl https://sdk.cloud.google.com | bash > /dev/null;
   - source $HOME/google-cloud-sdk/path.bash.inc
@@ -18,6 +17,7 @@ before_install:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USER" --password-stdin
   - docker build -t diegom626/react-test -f ./client/Dockerfile.dev ./client
   - TAG="$(echo $TRAVIS_COMMIT | head -c8)"
+  - echo $TAG
 
 script:
   - docker run diegom626/react-test npm test -- --coverage

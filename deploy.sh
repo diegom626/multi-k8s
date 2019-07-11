@@ -1,5 +1,6 @@
 #!/bin/bash
-echo ${TAG}
+TAG="$(echo $TRAVIS_COMMIT | head -c8)"
+
 docker build -t diegom626/multi-client:latest -t diegom626/multi-client:${TAG} -f ./client/Dockerfile ./client
 docker build -t diegom626/multi-server:latest -t diegom626/multi-server:${TAG} -f ./server/Dockerfile ./server
 docker build -t diegom626/multi-worker:latest -t diegom626/multi-worker:${TAG} -f ./worker/Dockerfile ./worker

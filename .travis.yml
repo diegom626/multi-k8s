@@ -13,7 +13,7 @@ before_install:
   - gcloud auth activate-service-account --key-file service-account.json
   - gcloud config set project multi-k8s-245719
   - gcloud config set compute/zone southamerica-east1-a	
-  - gcloud container clusters get-credentials k8s-cluster
+  - gcloud container clusters get-credentials k8s-multi
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USER" --password-stdin
   - docker build -t diegom626/react-test -f ./client/Dockerfile.dev ./client
   - TAG="$(echo $TRAVIS_COMMIT | head -c8)"
